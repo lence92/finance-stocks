@@ -1,0 +1,110 @@
+<table class="min-w-full divide-y divide-gray-300">
+  <thead>
+    <tr class="border-t-2 border-gray-200 bg-gray-100">
+      <th
+        scope="col"
+        class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-500 sm:pl-6 lg:pl-8"
+      >
+        Name
+      </th>
+      <th
+        scope="col"
+        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500"
+      >
+        Change Today
+      </th>
+      <th
+        scope="col"
+        class="px-3 py-3.5 text-left text-sm font-semibold text-gray-500"
+      >
+        Price
+      </th>
+      <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8"></th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-200 bg-white">
+    <tr *ngFor="let stock of _stocks">
+      <td class="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-6 lg:pl-8">
+        <div class="flex items-center">
+          <div class="h-11 w-11 flex-shrink-0">
+            <img class="h-11 w-11 rounded-full" [src]="stock.image" alt="" />
+          </div>
+          <div class="ml-4">
+            <div class="font-medium text-gray-900">{{ stock.name }}</div>
+            <div class="mt-1 text-gray-500">{{ stock.shortName }}</div>
+          </div>
+        </div>
+      </td>
+
+      <td
+        class="whitespace-nowrap px-3 py-5 text-sm"
+        [class]="{
+          'text-green-500': stock.changeToday > 0,
+          'text-gray-900': stock.changeToday === 0,
+          'text-red-600': stock.changeToday < 0
+        }"
+      >
+        <div>
+          {{ stock.changeToday || stock.price | currency }}
+        </div>
+        <div class="mt-1">
+          ({{
+            (stock.changeToday / stock.price) * 100
+              | number : "1.2-2"
+              | signNumber
+          }}%)
+        </div>
+      </td>
+
+      <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+        <div class="mt-1 text-gray-900">{{ stock.price | currency }}</div>
+      </td>
+      <td
+        class="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8"
+      >
+        <button
+          type="button"
+          class="inline-flex items-center gap-x-1.5 rounded-md bg-green-500 px-3 py-2 sm:mr-4 lg:mr-6 text-sm font-semibold text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+
+          Buy
+        </button>
+        <button
+          type="button"
+          class="inline-flex items-center gap-x-1.5 rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.5 2A2.5 2.5 0 0 0 2 4.5v3.879a2.5 2.5 0 0 0 .732 1.767l7.5 7.5a2.5 2.5 0 0 0 3.536 0l3.878-3.878a2.5 2.5 0 0 0 0-3.536l-7.5-7.5A2.5 2.5 0 0 0 8.38 2H4.5ZM5 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+
+          Sell
+        </button>
+      </td>
+    </tr>
+
+    <!-- More people... -->
+  </tbody>
+</table>
