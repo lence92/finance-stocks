@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Stock, Stocks } from 'src/app/reducers/stock/stock.model';
 
 @Component({
@@ -7,8 +7,14 @@ import { Stock, Stocks } from 'src/app/reducers/stock/stock.model';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent {
-  _stocks: ReadonlyArray<Stock> = [];
-  @Input() set stocks(value: Stocks) {
-    this._stocks = value.stocks;
+  @Input({
+    transform: (value: Stocks) => value.stocks,
+  })
+  stocks: Array<Stock> = [];
+
+  @Output() onBuySellClick: EventEmitter<string> = new EventEmitter();
+
+  onBuySellClickEvent(id: string) {
+    this.onBuySellClick.emit(id);
   }
 }

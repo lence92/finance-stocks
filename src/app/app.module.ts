@@ -12,6 +12,8 @@ import { BackendInterceptor } from './interceptor/backend.interceptor';
 import { SignNumberPipe } from './pipes/sign-number.pipe';
 import { StocksService } from './services/stocks/stocks.service';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     StockPageComponent,
     SignNumberPipe,
     DialogComponent,
+    SidemenuComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,

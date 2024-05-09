@@ -15,7 +15,7 @@ import {
 export class StockPageComponent implements OnInit {
   stocks$ = this.store.select(selectStocks);
   showDialog: boolean = false;
-  newStockUpdateId: string | undefined;
+  selectedStockId: string | undefined;
 
   constructor(private store: Store, private stocksService: StocksService) {}
 
@@ -27,14 +27,17 @@ export class StockPageComponent implements OnInit {
     setInterval(() => {
       this.stocksService.listen().subscribe(({ id, price }) => {
         this.store.dispatch(StockActions.updateStock({ id, price }));
-        this.showDialog = true;
-        this.newStockUpdateId = id;
       });
-    }, 5000);
+    }, 500);
   }
 
   filterStocks(searchedText: string) {
     this.stocks$ = this.store.select(searchStocks(searchedText));
+  }
+
+  openDialog(id: string) {
+    this.showDialog = true;
+    this.selectedStockId = id;
   }
 
   closeDialog() {
