@@ -1,7 +1,7 @@
 <div class="overflow-hidden rounded-lg bg-white shadow">
   <div class="px-4 py-5 sm:p-6">
     <app-search (searched)="filterStocks($event)" />
-    <div class="mt-8 flow-root">
+    <div class="mt-8 flow-root overflow-x-auto overflow-y-hidden">
       <div class="-mx-4 -my-2 sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle">
           <app-table
